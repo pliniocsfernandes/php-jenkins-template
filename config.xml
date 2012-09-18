@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>&lt;img type=&quot;image/svg+xml&quot; height=&quot;300&quot; src=&quot;ws/build/pdepend/overview-pyramid.svg&quot; width=&quot;500&quot;&gt;&lt;/img&gt;&#xd;
-&lt;img type=&quot;image/svg+xml&quot; height=&quot;300&quot; src=&quot;ws/build/pdepend/dependencies.svg&quot; width=&quot;500&quot;&gt;&lt;/img&gt;</description>
+  <description>&lt;img type=&quot;image/svg+xml&quot; height=&quot;300&quot; src=&quot;ws/build/artifacts/pdepend/overview-pyramid.svg&quot; width=&quot;500&quot;&gt;&lt;/img&gt;&#xd;
+&lt;img type=&quot;image/svg+xml&quot; height=&quot;300&quot; src=&quot;ws/build/artifacts/pdepend/dependencies.svg&quot; width=&quot;500&quot;&gt;&lt;/img&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties/>
   <scm class="hudson.scm.NullSCM"/>
@@ -15,6 +15,8 @@
   <builders>
     <hudson.tasks.Ant>
       <targets></targets>
+      <antOpts>-Xmx32m</antOpts>
+      <buildFile>build/build.xml</buildFile>
     </hudson.tasks.Ant>
   </builders>
   <publishers>
@@ -45,7 +47,7 @@
         <failedNewLow></failedNewLow>
       </thresholds>
       <shouldDetectModules>false</shouldDetectModules>
-      <pattern>build/logs/checkstyle.xml</pattern>
+      <pattern>build/artifacts/logs/checkstyle.xml</pattern>
     </hudson.plugins.checkstyle.CheckStylePublisher>
     <hudson.plugins.pmd.PmdPublisher>
       <healthy></healthy>
@@ -74,7 +76,7 @@
         <failedNewLow></failedNewLow>
       </thresholds>
       <shouldDetectModules>false</shouldDetectModules>
-      <pattern>build/logs/pmd.xml</pattern>
+      <pattern>build/artifacts/logs/pmd.xml</pattern>
     </hudson.plugins.pmd.PmdPublisher>
     <hudson.plugins.dry.DryPublisher>
       <healthy></healthy>
@@ -103,7 +105,7 @@
         <failedNewLow></failedNewLow>
       </thresholds>
       <shouldDetectModules>false</shouldDetectModules>
-      <pattern>build/logs/pmd-cpd.xml</pattern>
+      <pattern>build/artifacts/logs/pmd-cpd.xml</pattern>
       <highThreshold>50</highThreshold>
       <normalThreshold>25</normalThreshold>
     </hudson.plugins.dry.DryPublisher>
@@ -114,7 +116,7 @@
           <yaxis>Lines of Code</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -140,7 +142,7 @@
           <yaxis>Count</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -172,7 +174,7 @@
           <yaxis>Average Non-Comment Lines of Code</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -197,7 +199,7 @@
           <yaxis>Cyclomatic Complexity by Structure</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -222,7 +224,7 @@
           <yaxis>Count</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -276,7 +278,7 @@
           <yaxis>Count</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -302,7 +304,7 @@
           <yaxis>Count</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
+              <file>build/artifacts/logs/phploc.csv</file>
               <label></label>
               <fileType>csv</fileType>
               <strExclusionSet>
@@ -329,8 +331,8 @@
     </hudson.plugins.plot.PlotPublisher>
     <org.jenkinsci.plugins.cloverphp.CloverPublisher>
       <publishHtmlReport>true</publishHtmlReport>
-      <reportDir>build/coverage</reportDir>
-      <xmlLocation>build/logs/clover.xml</xmlLocation>
+      <reportDir>build/artifacts/coverage</reportDir>
+      <xmlLocation>build/artifacts/logs/clover.xml</xmlLocation>
       <disableArchiving>false</disableArchiving>
       <healthyTarget>
         <methodCoverage>70</methodCoverage>
@@ -343,14 +345,14 @@
       <reportTargets>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>API Documentation</reportName>
-          <reportDir>build/api</reportDir>
-          <reportFiles>index.xhtml</reportFiles>
+          <reportDir>build/artifacts/api</reportDir>
+          <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>
         </htmlpublisher.HtmlPublisherTarget>
         <htmlpublisher.HtmlPublisherTarget>
           <reportName>Code Browser</reportName>
-          <reportDir>build/code-browser</reportDir>
+          <reportDir>build/artifacts/code-browser</reportDir>
           <reportFiles>index.html</reportFiles>
           <keepAll>true</keepAll>
           <wrapperName>htmlpublisher-wrapper.html</wrapperName>
@@ -360,7 +362,7 @@
     <xunit>
       <types>
         <PHPUnitJunitHudsonTestType>
-          <pattern>build/logs/junit.xml</pattern>
+          <pattern>build/artifacts/logs/junit.xml</pattern>
           <faildedIfNotNew>true</faildedIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
           <stopProcessingIfError>true</stopProcessingIfError>
@@ -383,7 +385,7 @@
       <thresholdMode>1</thresholdMode>
     </xunit>
     <hudson.plugins.jdepend.JDependRecorder>
-      <configuredJDependFile>build/logs/jdepend.xml</configuredJDependFile>
+      <configuredJDependFile>build/artifacts/logs/jdepend.xml</configuredJDependFile>
     </hudson.plugins.jdepend.JDependRecorder>
     <hudson.plugins.violations.ViolationsPublisher>
       <config>
@@ -400,7 +402,7 @@
               <max>999</max>
               <unstable>999</unstable>
               <usePattern>false</usePattern>
-              <pattern>build/logs/checkstyle.xml</pattern>
+              <pattern>build/artifacts/logs/checkstyle.xml</pattern>
             </hudson.plugins.violations.TypeConfig>
           </entry>
           <entry>
@@ -422,7 +424,7 @@
               <max>999</max>
               <unstable>999</unstable>
               <usePattern>false</usePattern>
-              <pattern>build/logs/pmd-cpd.xml</pattern>
+              <pattern>build/artifacts/logs/pmd-cpd.xml</pattern>
             </hudson.plugins.violations.TypeConfig>
           </entry>
           <entry>
@@ -521,7 +523,7 @@
               <max>999</max>
               <unstable>999</unstable>
               <usePattern>false</usePattern>
-              <pattern>build/logs/pmd.xml</pattern>
+              <pattern>build/artifacts/logs/pmd.xml</pattern>
             </hudson.plugins.violations.TypeConfig>
           </entry>
           <entry>
